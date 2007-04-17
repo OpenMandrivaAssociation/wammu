@@ -1,8 +1,8 @@
 %define name wammu
-%define version 0.17
+%define version 0.19
 %define release %mkrel 1
 
-%define python_gammu_req 0.10
+%define python_gammu_req 0.19
 
 Summary:        Mobile phone manager
 Name:           %{name}
@@ -39,6 +39,4 @@ rm -rf $RPM_BUILD_ROOT
 %doc README AUTHORS FAQ COPYING NEWS
 %doc %{_mandir}/man1/*
 %dir %py_puresitedir/Wammu/
-
-
 
