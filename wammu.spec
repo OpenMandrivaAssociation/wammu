@@ -1,5 +1,5 @@
 %define name wammu
-%define version 0.19
+%define version 0.23
 %define release %mkrel 1
 
 %define python_gammu_req 0.19
@@ -8,13 +8,13 @@ Summary:        Mobile phone manager
 Name:           %{name}
 Version:        %{version}
 Release:        %{release}
-Source0:        %{name}-%{version}.tar.bz2
+Source0:        http://dl.cihar.com/%{name}/latest/%{name}-%{version}.tar.bz2
 License:        GPL
 Group:          Communications
-Url:        	http://www.cihar.com/gammu/wammu
+Url:        	http://wammu.edu
 Buildroot:  	%{_tmppath}/%name-%version-root
-Requires:       wxPythonGTK, python-gammu >= %{python_gammu_req}, gnome-bluetooth
-BuildRequires:  wxPythonGTK, python-gammu >= %{python_gammu_req}, python-devel
+Requires:       wxPythonGTK >= 2.6.2, python-gammu >= %{python_gammu_req}, gnome-bluetooth
+BuildRequires:  wxPythonGTK >= 2.6.2, python-gammu >= %{python_gammu_req}, python-devel
 BuildArch:	noarch
 
 %description
@@ -39,4 +39,3 @@ rm -rf $RPM_BUILD_ROOT
 %doc README AUTHORS FAQ COPYING NEWS
 %doc %{_mandir}/man1/*
 %dir %py_puresitedir/Wammu/
-
