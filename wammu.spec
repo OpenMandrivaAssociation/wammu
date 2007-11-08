@@ -2,7 +2,7 @@
 %define version 0.23
 %define release %mkrel 2
 
-%define python_gammu_req 0.19
+%define python_gammu_req 0.20
 
 Summary:        Mobile phone manager
 Name:           %{name}
