@@ -1,6 +1,6 @@
 %define name wammu
-%define version 0.23
-%define release %mkrel 2
+%define version 0.24
+%define release %mkrel 1
 
 %define python_gammu_req 0.20
 
@@ -9,7 +9,7 @@ Name:           %{name}
 Version:        %{version}
 Release:        %{release}
 Source0:        http://dl.cihar.com/%{name}/latest/%{name}-%{version}.tar.bz2
-License:        GPL
+License:        GPLv2+
 Group:          Communications
 Url:        	http://wammu.eu
 Buildroot:  	%{_tmppath}/%name-%version-root
