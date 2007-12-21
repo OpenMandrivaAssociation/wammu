@@ -12,6 +12,7 @@ Source0:        http://dl.cihar.com/%{name}/latest/%{name}-%{version}.tar.bz2
 License:        GPLv2+
 Group:          Communications
 Url:        	http://wammu.eu
+Buildroot:  	%{_tmppath}/%name-%version-root
 Requires:       wxPythonGTK >= 2.6.2, python-gammu >= %{python_gammu_req}, gnome-bluetooth
 BuildRequires:  wxPythonGTK >= 2.6.2, python-gammu >= %{python_gammu_req}, python-devel
 BuildArch:	noarch
