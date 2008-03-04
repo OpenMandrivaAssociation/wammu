@@ -1,5 +1,5 @@
 %define name wammu
-%define version 0.25
+%define version 0.26
 %define release %mkrel 1
 
 %define python_gammu_req 0.20
@@ -36,6 +36,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f INSTALLED_FILES
 %defattr(-,root,root)
-%doc README AUTHORS FAQ COPYING NEWS
+%doc README AUTHORS FAQ COPYING
 %doc %{_mandir}/man1/*
 %dir %py_puresitedir/Wammu/
