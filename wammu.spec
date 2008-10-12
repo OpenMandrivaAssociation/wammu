@@ -1,8 +1,8 @@
 %define name wammu
-%define version 0.28
+%define version 0.29
 %define release %mkrel 1
 
-%define python_gammu_req 0.20
+%define python_gammu_req 0.27
 
 Summary:        Mobile phone manager
 Name:           %{name}
