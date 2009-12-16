@@ -1,6 +1,6 @@
 %define name wammu
-%define version 0.30.1
-%define release %mkrel 2
+%define version 0.31.1
+%define release %mkrel 1
 
 %define python_gammu_req 0.24
 
@@ -39,3 +39,5 @@ rm -rf $RPM_BUILD_ROOT
 %doc README AUTHORS FAQ COPYING
 %doc %{_mandir}/man1/*
 %dir %py_puresitedir/Wammu/
+%lang(cs) /usr/share/man/cs/*/*
+%lang(cs) /usr/share/man/cs/*/*
