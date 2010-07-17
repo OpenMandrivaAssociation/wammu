@@ -28,17 +28,24 @@ supports - many Nokia, Siemens, Alcatel, ... Written using wxGTK.
 CFLAGS="$RPM_OPT_FLAGS" SKIPWXCHECK=yes python setup.py build
 
 %install
-SKIPWXCHECK=yes python setup.py install --root=$RPM_BUILD_ROOT --record=INSTALLED_FILES
-sed -i '/man1/ D' INSTALLED_FILES
+rm -rf $RPM_BUILD_ROOT
+SKIPWXCHECK=yes python setup.py install --root=$RPM_BUILD_ROOT
+
+%find_lang %name
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f INSTALLED_FILES
+%files -f %name.lang
 %defattr(-,root,root)
 %doc README AUTHORS FAQ COPYING
-%doc %{_mandir}/man1/*
-%dir %py_puresitedir/Wammu/
-%lang(cs) /usr/share/man/cs/*/*
-%lang(de) /usr/share/man/de/*/*
-%lang(nl) /usr/share/man/nl/*/*
+%{_bindir}/*
+%{py_puresitedir}/*
+%{_datadir}/Wammu
+%{_datadir}/applications/*.desktop
+%{_datadir}/pixmaps/*
+%{_mandir}/man1/*
+%lang(cs) %{_mandir}/cs/man?/*
+%lang(de) %{_mandir}/de/man?/*
+%lang(it) %{_mandir}/it/man?/*
+%lang(nl) %{_mandir}/nl/man?/*
