@@ -1,5 +1,5 @@
 %define name wammu
-%define version 0.33
+%define version 0.34
 %define release %mkrel 1
 
 %define python_gammu_req 0.24
@@ -49,3 +49,5 @@ rm -rf $RPM_BUILD_ROOT
 %lang(de) %{_mandir}/de/man?/*
 %lang(it) %{_mandir}/it/man?/*
 %lang(nl) %{_mandir}/nl/man?/*
+%lang(ru) %{_mandir}/ru/man?/*
+%lang(sk) %{_mandir}/sk/man?/*
