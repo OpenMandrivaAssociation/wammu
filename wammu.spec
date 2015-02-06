@@ -1,6 +1,6 @@
 %define name wammu
 %define version 0.36
-%define release 1
+%define release 2
 
 %define python_gammu_req 0.24
 
