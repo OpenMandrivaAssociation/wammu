@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   wammu-0.36.tar.bz2: acffc45bb69c8663ea4e5f475ddd297bd62e9f7b
+sources:
+  wammu-0.44.tar.xz: 9f2d701360a688f3d29e437a48c0ae29f01c6b55

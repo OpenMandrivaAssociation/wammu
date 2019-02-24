@@ -1,14 +1,10 @@
-%define name wammu
-%define version 0.36
-%define release 2
-
 %define python_gammu_req 0.24
 
 Summary:        Mobile phone manager
-Name:           %{name}
-Version:        %{version}
-Release:        %{release}
-Source0:        http://dl.cihar.com/%{name}/latest/%{name}-%{version}.tar.bz2
+Name:           wammu
+Version:        0.44
+Release:        2
+Source0:        http://dl.cihar.com/%{name}/latest/%{name}-%{version}.tar.xz
 License:        GPLv2+
 Group:          Communications
 Url:        	http://wammu.eu
