@@ -1,21 +1,22 @@
-%define python_gammu_req 0.24
+Summary:	Mobile phone manager
+Name:		wammu
+Version:	0.44
+Release:	1
+Source0:	http://dl.cihar.com/%{name}/releases/%{name}-%{version}.tar.xz
+License:	GPLv2+
+Group:		Communications
+Url:		http://wammu.eu
 
-Summary:        Mobile phone manager
-Name:           wammu
-Version:        0.44
-Release:        2
-Source0:        http://dl.cihar.com/%{name}/latest/%{name}-%{version}.tar.xz
-License:        GPLv2+
-Group:          Communications
-Url:        	http://wammu.eu
-BuildRequires:  wxPythonGTK >= 2.6.2
-BuildRequires:  python-gammu >= %{python_gammu_req}
-BuildRequires:  python-devel
+BuildRequires:	python-dbus
+BuildRequires:	pkgconfig(python2)
+BuildRequires:	pythonegg(python-gammu)
+BuildRequires:	pythonegg(setuptools)
+BuildRequires:	pythonegg(wxpython)
 
-Requires:       wxPythonGTK >= 2.6.2
-Requires:       python-gammu >= %{python_gammu_req}
-Requires:       gnome-bluetooth
-Requires:	python-pybluez
+Requires:	python-dbus
+Requires:	pythonegg(pybluez)
+Requires:	pythonegg(python-gammu)
+Requires:	pythonegg(wxpython)
 
 BuildArch:	noarch
 
@@ -23,33 +24,47 @@ BuildArch:	noarch
 Mobile phone manager using Gammu as it's backend. It works with any phone Gammu
 supports - many Nokia, Siemens, Alcatel, ... Written using wxGTK.
 
+%files -f %name.lang
+%doc README.* COPYING ChangeLog
+%{_bindir}/%{name}
+%{_bindir}/%{name}-configure
+%{_datadir}/Wammu
+%{_datadir}/pixmaps/*
+%{_datadir}/appdata/wammu.appdata.xml
+%{_datadir}/applications/%{name}.desktop
+%{_mandir}/man1/*.1.xz
+%{python2_sitelib}/Wammu
+%{python2_sitelib}/%{name}-%{version}-*.egg-info
+%lang(dk) %{_mandir}/da/man1/*.1.xz
+%lang(cz) %{_mandir}/cs/man1/*.1.xz
+%lang(de) %{_mandir}/de/man1/*.1.xz
+%lang(es) %{_mandir}/es/man1/*.1.xz
+%lang(et) %{_mandir}/et/man1/*.1.xz
+%lang(fr) %{_mandir}/fr/man1/*.1.xz
+%lang(gb) %{_mandir}/en_GB/man1/*.1.xz
+%lang(hu) %{_mandir}/hu/man1/*.1.xz
+%lang(id) %{_mandir}/id/man1/*.1.xz
+%lang(it) %{_mandir}/it/man1/*.1.xz
+%lang(nl) %{_mandir}/nl/man1/*.1.xz
+%lang(pt_br) %{_mandir}/pt_BR/man1/*.1.xz
+%lang(ru) %{_mandir}/ru/man1/*.1.xz
+%lang(uk) %{_mandir}/uk/man1/*.1.xz
+%lang(sk) %{_mandir}/sk/man1/*.1.xz
+%lang(sv) %{_mandir}/sv/man1/*.1.xz
+%lang(tr) %{_mandir}/tr/man1/*.1.xz
+
+#--------------------------------------------------------------
+
 %prep
 %setup -q
+%autopatch -p1
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" SKIPWXCHECK=yes python setup.py build
+%py2_build
 
 %install
-SKIPWXCHECK=yes python setup.py install --root=$RPM_BUILD_ROOT
+%py2_install
 
+# locales
 %find_lang %name
-
-%files -f %name.lang
-%doc README AUTHORS FAQ COPYING
-%{_bindir}/*
-%{py_puresitedir}/*
-%{_datadir}/Wammu
-%{_datadir}/applications/*.desktop
-%{_datadir}/pixmaps/*
-%{_mandir}/man1/*
-%lang(cs) %{_mandir}/cs/man?/*
-%lang(de) %{_mandir}/de/man?/*
-%lang(it) %{_mandir}/it/man?/*
-%lang(nl) %{_mandir}/nl/man?/*
-%lang(ru) %{_mandir}/ru/man?/*
-%lang(sk) %{_mandir}/sk/man?/*
-%lang(es) %{_mandir}/es/man?/*
-%lang(fr) %{_mandir}/fr/man?/*
-%lang(pt_BR) %{_mandir}/pt_BR/man?/*
-
 
