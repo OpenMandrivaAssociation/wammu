@@ -1,0 +1,102 @@
+--- a/wammu_setup/msgfmt.py
++++ b/wammu_setup/msgfmt.py
+@@ -99,14 +99,16 @@
+     # the keys are sorted in the .mo file
+     keys = list(sorted(MESSAGES.keys()))
+     offsets = []
+-    ids = strs = ''
++    ids = strs = b''
+     for id in keys:
++        msg = MESSAGES[id].encode('utf-8')
++        id = id.encode('utf-8')
+         # For each string, we need size and file offset.  Each string is NUL
+         # terminated; the NUL does not count into the size.
+-        offsets.append((len(ids), len(id), len(strs), len(MESSAGES[id])))
+-        ids += id + '\0'
+-        strs += MESSAGES[id] + '\0'
+-    output = ''
++        offsets.append((len(ids), len(id), len(strs), len(msg)))
++        ids += id + b'\0'
++        strs += msg + b'\0'
++    output = b''
+     # The header is 7 32-bit unsigned integers.  We don't use hash tables, so
+     # the keys start right after the index tables.
+     # translated string.
+@@ -128,7 +131,7 @@
+                          7*4,               # start of key index
+                          7*4+len(keys)*8,   # start of value index
+                          0, 0)              # size and offset of hash table
+-    output += array.array("i", offsets).tostring()
++    output += array.array("i", offsets).tobytes()
+     output += ids
+     output += strs
+     return output
+--- a/setup.py
++++ b/setup.py
+@@ -166,8 +166,8 @@
+         """
+         desktop = os.path.join(self.build_base, 'wammu.desktop')
+         distutils.log.info('generating %s -> %s', 'wammu.desktop.in', desktop)
+-        in_desktop = file('wammu.desktop.in', 'r')
+-        out_desktop = file(desktop, 'w')
++        in_desktop = open('wammu.desktop.in', 'r')
++        out_desktop = open(desktop, 'w')
+         for line in in_desktop:
+             if line.startswith('_Name'):
+                 out_desktop.write('Name=%s\n' % msgfmt.DESKTOP_NAME)
+@@ -198,7 +198,7 @@
+         """
+         appdata = os.path.join(self.build_base, 'wammu.appdata.xml')
+         distutils.log.info('generating %s -> %s', 'wammu.appdata.xml.in', appdata)
+-        in_appdata = file('wammu.appdata.xml.in', 'r')
++        in_appdata = open('wammu.appdata.xml.in', 'r')
+         tree = ElementTree.parse(in_appdata)
+         description = tree.find('description')
+         p1 = ElementTree.SubElement(description, 'p')
+@@ -218,16 +218,16 @@
+             if 'Description_1' in translation and 'Description_2' in translation:
+                 p1 = ElementTree.SubElement(description, 'p')
+                 p1.set('xml:lang', loc)
+-                p1.text = translation['Description_1'].decode('utf-8')
++                p1.text = translation['Description_1']
+                 p1.tail = '\n    '
+                 p2 = ElementTree.SubElement(description, 'p')
+                 p2.set('xml:lang', loc)
+-                p2.text = translation['Description_2'].decode('utf-8')
++                p2.text = translation['Description_2']
+                 p2.tail = '\n    '
+             if 'Name' in translation:
+                 element = ElementTree.Element('name')
+                 element.set('xml:lang', loc)
+-                element.text = translation['Name'].decode('utf-8')
++                element.text = translation['Name']
+                 element.tail = '\n  '
+                 component.append(
+                     element
+@@ -235,7 +235,7 @@
+             if 'GenericName' in translation:
+                 element = ElementTree.Element('summary')
+                 element.set('xml:lang', loc)
+-                element.text = translation['GenericName'].decode('utf-8')
++                element.text = translation['GenericName']
+                 element.tail = '\n  '
+                 component.append(
+                     element
+@@ -291,12 +291,12 @@
+             print('found version %s ...' % wx.VERSION_STRING, end='')
+             if wx.VERSION < WXPYTHON_REQUIRED:
+                 print('too old!')
+-                print('You need at least wxPython %s!' % '.'.join(map(str, WXPYTHON_REQUIRED)))
+-                print('You can get it from <http://www.wxpython.org>')
+-            elif not wx.USE_UNICODE:
+-                print('not unicode!')
+-                print('You need at least wxPython %s with unicode enabled!' % '.'.join(map(str, WXPYTHON_REQUIRED)))
++                print('You need at least wxPython0/search.php?query=USE_UNICODE0/search.php?query=USE_UNICODE %s!' % '.'.join(map(str, WXPYTHON_REQUIRED)))
+                 print('You can get it from <http://www.wxpython.org>')
++            #elif not wx.USE_UNICODE:
++            #    print('not unicode!')
++            #    print('You need at least wxPython %s with unicode enabled!' % '.'.join(map(str, WXPYTHON_REQUIRED)))
++            #    print('You can get it from <http://www.wxpython.org>')
+             else:
+                 print('OK')
+         except ImportError:
