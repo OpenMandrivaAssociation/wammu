@@ -21,7 +21,7 @@ Source0:	https://github.com/gammu/%{name}/archive/%{?commit:master}%{!?commit:%{
 Patch0:		wammu-0.44-fix_python.patch
 License:	GPLv3+
 Group:		Communications
-Url:		http://wammu.eu
+Url:		https://wammu.eu
 
 BuildRequires:	python-dbus
 BuildRequires:	pkgconfig(python3)
